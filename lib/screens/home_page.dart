@@ -376,10 +376,10 @@ class RightPointingBubblePainter extends CustomPainter {
       ..color = Colors.black.withOpacity(0.1)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
 
-    final radius = 24.0;
-    final triangleWidth = 16.0;
+    final radius = 50.0;
+    final triangleWidth = 15.0;
     // ignore: unused_local_variable
-    final triangleHeight = 12.0;
+    final triangleHeight = 50.0;
     final triangleBase = 24.0;
 
     final path = Path()
