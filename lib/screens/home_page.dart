@@ -27,71 +27,84 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Container unificado com avatar, saudação e streak
+              // Container unificado com avatar, saudação e streak
               Container(
                 padding: EdgeInsets.all(screenWidth * 0.04),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
                   children: [
-                    const CircleAvatar(
-                      radius: 40,
-                      backgroundImage: AssetImage('assets/avatar.png'),
+                    // Linha com avatar e saudação
+                    Row(
+                      children: [
+                        const CircleAvatar(
+                          radius: 30,
+                          backgroundImage: AssetImage('assets/avatar.png'),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Olá, Pedro!",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const Text(
+                                "Pronto para mais um dia saudável?",
+                                style: TextStyle(fontSize: 14, color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
+                    const SizedBox(height: 12),
+                    // Container do streak com texto em cima e corações embaixo
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF5F3F7),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Olá, Pedro!",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const Text(
-                            "Pronto para mais um dia saudável?",
-                            style: TextStyle(fontSize: 14, color: Colors.grey),
-                          ),
-                          const SizedBox(height: 8),
+                          // Texto do streak
                           Text(
-                            "  $currentStreak dias seguidos de melhora",
+                            "$currentStreak dias seguidos de melhora",
                             style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: Colors.deepPurple,
+                              color: Colors.amber,
                             ),
                           ),
                           const SizedBox(height: 8),
+                          // Linha de corações
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(streak.length, (index) {
-                              return Flexible(
-                                child: Column(
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 4),
+                                child: Stack(
+                                  alignment: Alignment.center,
                                   children: [
-                                    AnimatedContainer(
-                                      duration: const Duration(milliseconds: 500),
-                                      curve: Curves.easeInOut,
-                                      child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.favorite,
-                                            color: streak[index] ? Colors.amber : Colors.grey[300],
-                                            size: screenWidth * 0.08,
-                                          ),
-                                          Text(
-                                            weekDays[index],
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold,
-                                              color: streak[index] ? Colors.white : Colors.grey[600],
-                                            ),
-                                          ),
-                                        ],
+                                    Icon(
+                                      Icons.favorite,
+                                      color: streak[index] ? Colors.amber : Colors.grey[300],
+                                      size: screenWidth * 0.07,
+                                    ),
+                                    Text(
+                                      weekDays[index],
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                        color: streak[index] ? Colors.white : Colors.grey[600],
                                       ),
                                     ),
                                   ],
@@ -105,9 +118,9 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-
               const SizedBox(height: 20),
 
+              // Curiosidade do Dia
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.all(screenWidth * 0.04),
@@ -133,30 +146,102 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-
               const SizedBox(height: 20),
 
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFC793CF),
-                    padding: EdgeInsets.symmetric(vertical: screenWidth * 0.06),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              // Seção com imagem, balão de conversa e botões
+              Container(
+                padding: EdgeInsets.all(screenWidth * 0.04),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Balão de conversa
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.all(16),
+                            margin: const EdgeInsets.only(right: 8, top: 20),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: const Text(
+                              "Como você está se sentindo?",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ),
+                        ),
+                        // Imagem maior à direita
+                        const Expanded(
+                          child: Image(
+                            image: AssetImage('assets/saudacoes.png'),
+                            height: 180,
+                            alignment: Alignment.topRight,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  child: const Text(
-                    "Agendar Consulta",
-                    style: TextStyle(fontSize: 20),
-                  ),
+                    const SizedBox(height: 24),
+                    // Botões maiores e lilás
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFFC793CF),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                            ),
+                            child: const Text(
+                              "Registrar Emoções",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFFC793CF),
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                            ),
+                            child: const Text(
+                              "Agendar Consulta",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-
               const SizedBox(height: 20),
 
+              // Sugestões do Psicólogo
               Container(
+                width: double.infinity,
                 padding: EdgeInsets.all(screenWidth * 0.04),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -165,67 +250,20 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Center(
-                      child: Text(
-                        "Sugestões de Hoje",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    const Text(
+                      "Sugestões de Hoje",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    suggestionTile("Respiração profunda por 10 minutos", Icons.local_drink),
-                    suggestionTile("Caminhar por 30 minutos", Icons.directions_walk),
-                    suggestionTile("Evitar açúcar refinado", Icons.no_food),
+                    const SizedBox(height: 12),
+                    suggestionTile(Icons.spa, "Respiração profunda por 10 minutos"),
+                    suggestionTile(Icons.directions_walk, "Caminhar por 30 minutos"),
+                    suggestionTile(Icons.no_food, "Evitar açúcar refinado"),
                   ],
                 ),
               ),
-
-              const SizedBox(height: 20),
-
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: screenWidth * 0.3,
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 255, 255, 255),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: const Center(
-                            child: Icon(Icons.emergency, color: Color.fromARGB(255, 112, 32, 32), size: 100),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        const Text("Emergência", style: TextStyle(fontWeight: FontWeight.bold))
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: screenWidth * 0.3,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFC793CF),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Center(
-                            child: Image.asset('assets/cat_icon.png', height: screenWidth * 0.6),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        const Text("Chat-Cat", style: TextStyle(fontWeight: FontWeight.bold))
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-
               const SizedBox(height: 20),
             ],
           ),
@@ -234,7 +272,7 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
         backgroundColor: Colors.white,
-        selectedItemColor: Colors.deepPurple,
+        selectedItemColor: Color(0xFFC793CF),
         unselectedItemColor: Colors.grey,
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -242,32 +280,31 @@ class HomePage extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.phone),
             label: 'Emergência',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Início',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_month),
-                label: 'Agenda',
-                ),
-              ],
-            ),
-
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Início',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month),
+            label: 'Agenda',
+          ),
+        ],
+      ),
     );
   }
 
-  Widget suggestionTile(String text, IconData icon) {
+  Widget suggestionTile(IconData icon, String text) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(12),
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
       decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(16),
+        color: const Color(0xFFF5F3F7),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
-          Icon(icon, size: 22, color: Colors.deepPurple),
+          Icon(icon, color: Color(0xFFC793CF)),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
@@ -275,7 +312,7 @@ class HomePage extends StatelessWidget {
               style: const TextStyle(fontSize: 14),
             ),
           ),
-          const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
+          const Icon(Icons.chevron_right, color: Colors.grey),
         ],
       ),
     );

@@ -56,6 +56,7 @@ flutter:
     - assets/cat_icon.png
     - assets/cat_splash.jpeg
     - assets/avatar.png
+    - assets/saudacoes.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
