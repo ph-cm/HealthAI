@@ -265,11 +265,57 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-            ],
-          ),
+
+              Positioned(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              child: ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Ajuda de Emergência'),
+                      content: const Text('Deseja contactar os serviços de emergência?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text('Cancelar'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Implementar chamada real aqui
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Ligar para 188'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 150, 49, 41),
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  minimumSize: const Size(double.infinity, 50)
+                ),
+                child: const Text(
+                  'EMERGÊNCIA',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+    ),
+        bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
         backgroundColor: Colors.white,
         selectedItemColor: const Color(0xFFC793CF),
@@ -279,7 +325,7 @@ class HomePage extends StatelessWidget {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.phone),
-            label: 'Emergência',
+            label: 'Consulta',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
