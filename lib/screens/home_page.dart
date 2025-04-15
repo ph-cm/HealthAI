@@ -378,6 +378,7 @@ class RightPointingBubblePainter extends CustomPainter {
 
     final radius = 24.0;
     final triangleWidth = 16.0;
+    // ignore: unused_local_variable
     final triangleHeight = 12.0;
     final triangleBase = 24.0;
 
