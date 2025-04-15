@@ -20,14 +20,13 @@ class HomePage extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F1F7),
+      backgroundColor: const Color(0xFFFFFEF6),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.all(screenWidth * 0.04),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Container unificado com avatar, saudação e streak
               // Container unificado com avatar, saudação e streak
               Container(
                 padding: EdgeInsets.all(screenWidth * 0.04),
@@ -37,7 +36,6 @@ class HomePage extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    // Linha com avatar e saudação
                     Row(
                       children: [
                         const CircleAvatar(
@@ -66,7 +64,6 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 12),
-                    // Container do streak com texto em cima e corações embaixo
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
@@ -75,17 +72,15 @@ class HomePage extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          // Texto do streak
                           Text(
                             "$currentStreak dias seguidos de melhora",
                             style: const TextStyle(
-                              fontSize: 15,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
                               color: Colors.amber,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          // Linha de corações
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: List.generate(streak.length, (index) {
@@ -148,7 +143,7 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Seção com imagem, balão de conversa e botões
+              // Seção com balão de fala e imagem do gato (área modificada)
               Container(
                 padding: EdgeInsets.all(screenWidth * 0.04),
                 decoration: BoxDecoration(
@@ -158,50 +153,55 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Balão de conversa
-                        Expanded(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Balão de fala (mantido igual)
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 20, right: 10),
                           child: Container(
-                            padding: const EdgeInsets.all(16),
-                            margin: const EdgeInsets.only(right: 8, top: 20),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(16),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 3),
+                            constraints: const BoxConstraints(minHeight: 80),
+                            child: CustomPaint(
+                              painter: RightPointingBubblePainter(),
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+                                child: const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Como você está se sentindo?",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
                                 ),
-                              ],
-                            ),
-                            child: const Text(
-                              "Como você está se sentindo?",
-                              style: TextStyle(fontSize: 20),
+                              ),
                             ),
                           ),
                         ),
-                        // Imagem maior à direita
-                        const Expanded(
-                          child: Image(
+                      ),
+                      
+                      // Imagem do gato com ajuste para os bigodes
+                      Transform.translate(
+                        offset: const Offset(-15, 0), // Move um pouco para esquerda
+                        child: Container(
+                          padding: const EdgeInsets.only(left: 5), // Espaço para os bigodes
+                          child: const Image(
                             image: AssetImage('assets/saudacoes.png'),
                             height: 180,
-                            alignment: Alignment.topRight,
+                            fit: BoxFit.contain,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
+                  ),
                     const SizedBox(height: 24),
-                    // Botões maiores e lilás
+                    
+                    // Botões
                     Row(
                       children: [
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFFC793CF),
+                              backgroundColor: const Color(0xFFC793CF),
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -219,7 +219,7 @@ class HomePage extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFFC793CF),
+                              backgroundColor: const Color(0xFFC793CF),
                               foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
@@ -272,7 +272,7 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
         backgroundColor: Colors.white,
-        selectedItemColor: Color(0xFFC793CF),
+        selectedItemColor: const Color(0xFFC793CF),
         unselectedItemColor: Colors.grey,
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -304,7 +304,7 @@ class HomePage extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(icon, color: Color(0xFFC793CF)),
+          Icon(icon, color: const Color(0xFFC793CF)),
           const SizedBox(width: 12),
           Expanded(
             child: Text(
@@ -317,4 +317,55 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+class RightPointingBubblePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.white
+      ..style = PaintingStyle.fill;
+
+    final shadowPaint = Paint()
+      ..color = Colors.black.withOpacity(0.1)
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
+
+    final radius = 24.0;
+    final triangleWidth = 16.0;
+    final triangleHeight = 12.0;
+    final triangleBase = 24.0;
+
+    final path = Path()
+      ..moveTo(radius, 0)
+      ..lineTo(size.width - radius - triangleWidth, 0)
+      ..arcToPoint(
+        Offset(size.width - triangleWidth, radius),
+        radius: Radius.circular(radius),
+      )
+      ..lineTo(size.width - triangleWidth, size.height/2 - triangleBase/2)
+      ..lineTo(size.width, size.height/2)
+      ..lineTo(size.width - triangleWidth, size.height/2 + triangleBase/2)
+      ..lineTo(size.width - triangleWidth, size.height - radius)
+      ..arcToPoint(
+        Offset(size.width - radius - triangleWidth, size.height),
+        radius: Radius.circular(radius),
+      )
+      ..lineTo(radius, size.height)
+      ..arcToPoint(
+        Offset(0, size.height - radius),
+        radius: Radius.circular(radius),
+      )
+      ..lineTo(0, radius)
+      ..arcToPoint(
+        Offset(radius, 0),
+        radius: Radius.circular(radius),
+      )
+      ..close();
+
+    canvas.drawPath(path, shadowPaint);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
