@@ -335,6 +335,9 @@ const SizedBox(height: 20),
           if (index == 0) {
             Navigator.pushNamed(context, '/video-chamada');
           }
+          if (index == 2){
+            Navigator.pushNamed(context, '/calendario');
+          }
         },
         items: const [
           BottomNavigationBarItem(
@@ -347,7 +350,7 @@ const SizedBox(height: 20),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),
-            label: 'Agenda',
+            label: 'Calendario',
           ),
         ],
       ),

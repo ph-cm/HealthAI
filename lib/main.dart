@@ -6,6 +6,7 @@ import './screens/splash_page.dart';
 import './screens/sign_in.dart';
 import './screens/sign_up.dart';
 import './screens/video_call_page.dart';
+import './screens/calendario_historico_page.dart'; // ⬅️ Novo import
 
 void main() {
   runApp(const MeuApp());
@@ -32,11 +33,8 @@ class MeuApp extends StatelessWidget {
         '/atividade-descricao': (context) => const AtividadeDescricaoPage(),
         '/atividade-respiracao': (context) => const TelaRespiracao(),
         '/video-chamada': (context) => const VideoCallPage(),
-      }
-        );
-      }
-
-    }
-
-    
-
+        '/calendario': (context) => const CalendarioHistoricoPage(), // ⬅️ Nova rota
+      },
+    );
+  }
+}
