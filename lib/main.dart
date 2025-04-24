@@ -5,6 +5,7 @@ import './screens/atividade_respiracao.dart';
 import './screens/splash_page.dart';
 import './screens/sign_in.dart';
 import './screens/sign_up.dart';
+import './screens/video_call_page.dart';
 
 void main() {
   runApp(const MeuApp());
@@ -30,8 +31,12 @@ class MeuApp extends StatelessWidget {
         '/': (context) => const HomePage(),
         '/atividade-descricao': (context) => const AtividadeDescricaoPage(),
         '/atividade-respiracao': (context) => const TelaRespiracao(),
-      },
+        '/video-chamada': (context) => const VideoCallPage(),
+      }
+        );
+      }
 
-    );
-  }
-}
+    }
+
+    
+

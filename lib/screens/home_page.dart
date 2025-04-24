@@ -331,6 +331,11 @@ const SizedBox(height: 20),
         unselectedItemColor: Colors.grey,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushNamed(context, '/video-chamada');
+          }
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.phone),
@@ -346,6 +351,7 @@ const SizedBox(height: 20),
           ),
         ],
       ),
+
     );
   }
 
