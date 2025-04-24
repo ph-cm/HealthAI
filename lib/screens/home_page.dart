@@ -246,25 +246,34 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Sugestões de Hoje",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    suggestionTile(Icons.spa, "Respiração profunda por 10 minutos"),
-                    suggestionTile(Icons.directions_walk, "Caminhar por 30 minutos"),
-                    suggestionTile(Icons.no_food, "Evitar açúcar refinado"),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Sugestões de Hoje",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          ),
+                          ),
+      const SizedBox(height: 12),
+
+      // Sugestão clicável com navegação
+      GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/atividade-descricao');
+        },
+        child: suggestionTile(Icons.spa, "Respiração profunda por 10 minutos"),
+      ),
+
+      suggestionTile(Icons.directions_walk, "Caminhar por 30 minutos"),
+      suggestionTile(Icons.no_food, "Evitar açúcar refinado"),
+    ],
+  ),
+),
+const SizedBox(height: 20),
+
 
               Positioned(
               bottom: 20,
