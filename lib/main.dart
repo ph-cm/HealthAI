@@ -6,11 +6,10 @@ import './screens/splash_page.dart';
 import './screens/sign_in.dart';
 import './screens/sign_up.dart';
 import './screens/video_call_page.dart';
-import './screens/calendario_historico_page.dart'; // ⬅️ Novo import
+import './screens/calendario_historico_page.dart';
 import './screens/emocao_selecao.dart';
-import './screens/emocao_intensidade.dart';
 import './screens/emocao_reflexao.dart';
-import './screens/emocao_grafico.dart';
+import './screens/emocao_feedback.dart';
 
 void main() {
   runApp(const MeuApp());
@@ -22,14 +21,14 @@ class MeuApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Application_Health_AI',
+      title: 'Health AI',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
         scaffoldBackgroundColor: const Color(0xFFFFFEF6),
       ),
       initialRoute: '/splash',
-            routes: {
+      routes: {
         '/splash': (context) => const SplashPage(),
         '/sign-in': (context) => const SignInPage(),
         '/sign-up': (context) => const SignUpPage(),
@@ -40,38 +39,29 @@ class MeuApp extends StatelessWidget {
         '/calendario': (context) => const CalendarioHistoricoPage(),
         '/emocao-selecao': (context) => const EmotionSelectionScreen(),
       },
-      // In your main.dart, update the onGenerateRoute:
-onGenerateRoute: (settings) {
-  switch (settings.name) {
-    case '/emocao-intensidade':
-      final emocao = settings.arguments as String; 
-      return MaterialPageRoute(
-        builder: (context) => EmocaoIntensidadeScreen(emocao: emocao),
-      );
+      onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case '/emocao-reflexao':
+              final emocao = settings.arguments as String;
+              return MaterialPageRoute(
+                builder: (context) => EmocaoReflexaoScreen(emocao: emocao),
+              );
 
-    case '/emocao-reflexao':
-      final args = settings.arguments as Map<String, dynamic>;
-      return MaterialPageRoute(
-        builder: (context) => EmocaoReflexaoScreen(
-          emocao: args['emocao'],
-          intensidade: args['intensidade'],
-        ),
-      );
-
-          case '/emocao-grafico':
-            final args = settings.arguments as Map<String, dynamic>? ?? {};
+          case '/emocao-feedback':
+            final args = settings.arguments as Map<String, dynamic>;
             return MaterialPageRoute(
-              builder: (context) => EmocaoGraficoScreen(
-                emocao: List<String>.from(args['emocao'] ?? []),
-                intensidade: List<int>.from((args['intensidade'] as List<dynamic>?)?.map((e) => e as int) ?? []),
+              builder: (context) => FeedbackDiarioScreen(
+                emocao: args['emocao'],
+                motivo: args['motivo'],
               ),
             );
 
           default:
-            return null;
+            return MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            );
         }
       },
-
     );
   }
 }

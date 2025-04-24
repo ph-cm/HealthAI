@@ -9,70 +9,117 @@ class EmotionSelectionScreen extends StatefulWidget {
 
 class _EmotionSelectionScreenState extends State<EmotionSelectionScreen> {
   final List<Map<String, dynamic>> emotions = [
-    {'emoji': '😊', 'name': 'Feliz'},
-    {'emoji': '😢', 'name': 'Triste'},
-    {'emoji': '😠', 'name': 'Bravo'},
-    {'emoji': '😨', 'name': 'Ansioso'},
-    {'emoji': '😌', 'name': 'Calmo'},
+    {'name': 'Animado', 'color': Color(0xFFFFF176)},
+    {'name': 'Desanimado', 'color': Color(0xFF81D4FA)},
+    {'name': 'Irritado', 'color': Color(0xFFEF9A9A)},
+    {'name': 'Confuso', 'color': Color(0xFFCE93D8)},
   ];
-  
+
   String? selectedEmotion;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Como você está se sentindo?'),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+      backgroundColor: const Color(0xFFF3ECFB),
+      body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Pergunta", style: TextStyle(color: Colors.grey)),
+                  Row(
+                    children: List.generate(4, (index) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 2),
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: index == 0 ? Colors.purple : Colors.grey[300],
+                        ),
+                      );
+                    }),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text("Pular", style: TextStyle(color: Colors.grey)),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
             const Text(
-              'Selecione uma emoção para refletir:',
-              style: TextStyle(fontSize: 18),
+              "Como se sente agora?",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              height: 250,
+              child: Image.asset('assets/saudacoes.png', fit: BoxFit.contain),
             ),
             const SizedBox(height: 20),
-            Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              alignment: WrapAlignment.center,
-              children: emotions.map((emotion) => ChoiceChip(
-                avatar: Text(emotion['emoji'], style: const TextStyle(fontSize: 24)),
-                label: Text(emotion['name']),
-                selectedColor: Colors.purple[200],
-                selected: selectedEmotion == emotion['name'],
-                onSelected: (val) {
-                  setState(() {
-                    selectedEmotion = val ? emotion['name'] : null;
-                  });
-                },
-              )).toList(),
-            ),
-            const SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: selectedEmotion != null
-                  ? () {
-                      Navigator.pushNamed(
-                        context,
-                        '/emocao-intensidade',
-                        arguments: selectedEmotion,
-                      );
-                    }
-                  : null,
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                backgroundColor: Colors.purple,
-                disabledBackgroundColor: Colors.purple[100],
+            Container(
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(horizontal: 24),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 8, offset: const Offset(0, 2))
+                ],
               ),
-              child: const Text(
-                'Próximo',
-                style: TextStyle(fontSize: 18, color: Colors.white),
+              child: Column(
+                children: emotions.map((emotion) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    child: GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        setState(() => selectedEmotion = emotion['name']);
+                        print('Clicou na emoção: ${emotion['name']}');
+                        Navigator.pushNamed(
+                          context,
+                          '/emocao-reflexao',
+                          arguments: emotion['name'],
+                        );
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        decoration: BoxDecoration(
+                          color: emotion['color'],
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: selectedEmotion == emotion['name'] ? Colors.deepPurple : Colors.transparent,
+                            width: 2,
+                          ),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          emotion['name'],
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
             ),
-            const SizedBox(height: 24),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: const [
+                  Icon(Icons.phone, color: Colors.grey),
+                  Icon(Icons.home, color: Colors.grey),
+                  Icon(Icons.calendar_today, color: Colors.grey),
+                ],
+              ),
+            )
           ],
         ),
       ),
