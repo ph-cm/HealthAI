@@ -139,7 +139,7 @@ class Leaf {
   final double sway = Random().nextDouble() * 0.4 + 0.1;     // oscilação
   final double angle = Random().nextDouble() * pi * 2;       // rotação
   final double startOffset = Random().nextDouble();          // início aleatório
-  final Color color = const Color(0xFFC793CF);               // cor lilás
+  final Color color = const Color(0xFFC793CF);             // cor lilás
 }
 
 
@@ -171,4 +171,5 @@ void paint(Canvas canvas, Size size) {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
+  
 }

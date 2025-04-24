@@ -197,9 +197,12 @@ class HomePage extends StatelessWidget {
                     // Botões
                     Row(
                       children: [
+                       
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/emocao-selecao');
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFFC793CF),
                               foregroundColor: Colors.white,
@@ -214,7 +217,9 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                         ),
+
                         const SizedBox(width: 12),
+                        
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {},

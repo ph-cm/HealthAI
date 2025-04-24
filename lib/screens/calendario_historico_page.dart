@@ -69,7 +69,7 @@ class _CalendarioHistoricoPageState extends State<CalendarioHistoricoPage> {
     if ([2, 5, 9, 15, 16, 17, 18, 19].contains(index)) {
       return const CircleAvatar(radius: 10, backgroundColor: Colors.amber);
     } else if (index == 10) {
-      return const CircleAvatar(radius: 14, backgroundImage: AssetImage('assets/avatar.png'));
+      return const CircleAvatar(radius: 14, backgroundImage: AssetImage('assets/avatar_psicologa.png'));
     } else if (index == 12) {
       return const Icon(Icons.description, size: 24, color: Colors.grey);
     } else {
@@ -88,7 +88,7 @@ class _CalendarioHistoricoPageState extends State<CalendarioHistoricoPage> {
         ),
         child: Row(
           children: const [
-            CircleAvatar(radius: 24, backgroundImage: AssetImage('assets/avatar2.png')),
+            CircleAvatar(radius: 24, backgroundImage: AssetImage('assets/avatar_psicologa.png')),
             SizedBox(width: 12),
             Expanded(
               child: Column(
