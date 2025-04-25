@@ -64,7 +64,10 @@ flutter:
     - assets/avatar_psicologa.png
     - assets/feliz.png
     - assets/pedindo.png
+    - assets/leticia.png
+    - assets/joao.png
     
+
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

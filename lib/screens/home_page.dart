@@ -222,7 +222,10 @@ class HomePage extends StatelessWidget {
                         
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                            Navigator.pushNamed(context, '/selecao-psicologo');
+                          },                                                                                                                                                                                                     
+
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFFC793CF),
                               foregroundColor: Colors.white,

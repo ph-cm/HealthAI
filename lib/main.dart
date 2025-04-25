@@ -10,6 +10,7 @@ import './screens/calendario_historico_page.dart';
 import './screens/emocao_selecao.dart';
 import './screens/emocao_reflexao.dart';
 import './screens/emocao_feedback.dart';
+import './screens/selecao_psicologo.dart';
 
 void main() {
   runApp(const MeuApp());
@@ -38,6 +39,7 @@ class MeuApp extends StatelessWidget {
         '/video-chamada': (context) => const VideoCallPage(),
         '/calendario': (context) => const CalendarioHistoricoPage(),
         '/emocao-selecao': (context) => const EmotionSelectionScreen(),
+        '/selecao-psicologo': (context) => const SelecaoPsicologoPage(),
       },
       onGenerateRoute: (settings) {
           switch (settings.name) {
