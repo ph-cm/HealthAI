@@ -19,10 +19,10 @@ class SelecaoPsicologoPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const SizedBox(height: 10),
+          const SizedBox(height: 20),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               children: const [
                 PsicologoCard(
                   nome: 'Gabriela Lopes',
@@ -85,30 +85,59 @@ class PsicologoCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: ListTile(
-        contentPadding: const EdgeInsets.all(12),
-        leading: CircleAvatar(
-          backgroundImage: AssetImage(imagemAsset),
-          radius: 28,
-        ),
-        title: Text(
-          'Nome: $nome',
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('CRP: $crp'),
-            const SizedBox(height: 4),
-            Text(especialidades),
-          ],
-        ),
-        trailing: const Icon(Icons.arrow_forward_ios),
+Widget build(BuildContext context) {
+  return Card(
+    margin: const EdgeInsets.symmetric(vertical: 12),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20),
+    ),
+    elevation: 4,
+    child: Container(
+      padding: const EdgeInsets.all(16),
+      height: 130,
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.asset(
+              imagemAsset,
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  nome,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF5E348F),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  'CRP: $crp',
+                  style: const TextStyle(fontSize: 14, color: Colors.black87),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  especialidades,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
+          const Icon(Icons.arrow_forward_ios, color: Colors.grey, size: 20),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
